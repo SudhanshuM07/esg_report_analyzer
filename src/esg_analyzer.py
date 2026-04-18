@@ -2,7 +2,7 @@
 ESG Analyzer — uses Gemini API to analyze ESG reports and answer questions.
 This is the core LLM / RAG layer of the project.
 """
-
+import streamlit as st
 import os
 import json
 import re
@@ -12,10 +12,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 🔑 Configure Gemini API
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY", ""))
+api_key = st.secrets.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 model = genai.GenerativeModel("gemini-1.5-flash")
-
 
 # ── System Prompts ────────────────────────────────────────────
 
