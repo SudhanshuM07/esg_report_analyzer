@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌿 ESG Finance Report Analyzer
 ### Final Year Project — AI-Powered ESG Analysis using RAG
 
@@ -170,3 +171,6 @@ The app will open automatically at: **http://localhost:8501**
 ---
 
 *Built as Final Year Project — AI/ML stream*
+=======
+# esg_report_analyzer
+>>>>>>> f0bdbdeaf0f9d9d979da3ed087ce8d1448e5406f
