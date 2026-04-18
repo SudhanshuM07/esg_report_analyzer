@@ -71,8 +71,7 @@ python -m venv venv
 # Windows:
 venv\Scripts\activate
 
-# Mac/Linux:
-source venv/bin/activate
+
 ```
 
 ### Step 3 — Install Dependencies
@@ -97,8 +96,7 @@ cp .env.example .env
 # Windows:
 set ANTHROPIC_API_KEY=sk-ant-xxxxx
 
-# Mac/Linux:
-export ANTHROPIC_API_KEY=sk-ant-xxxxx
+
 ```
 
 ### Step 6 — Run the App
@@ -157,20 +155,7 @@ The app will open automatically at: **http://localhost:8501**
 
 ---
 
-## 🏆 Project Evaluation Points
 
-- ✅ Working RAG pipeline (retrieval + generation)
-- ✅ Real Claude API integration
-- ✅ Clean UI with Streamlit
-- ✅ Structured JSON output with scores
-- ✅ Downloadable HTML report
-- ✅ Chat / Q&A over documents
-- ✅ Visual charts (Plotly)
-- ✅ Follows all 10 project phases
-
----
-
-*Built as Final Year Project — AI/ML stream*
 =======
 # esg_report_analyzer
 >>>>>>> f0bdbdeaf0f9d9d979da3ed087ce8d1448e5406f
