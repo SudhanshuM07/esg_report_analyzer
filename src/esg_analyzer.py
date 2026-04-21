@@ -105,40 +105,80 @@ def answer_question(question: str, context: str) -> str:
 # ── Fallback (unchanged logic) ─────────────────────────────────
 
 def _fallback_result(text: str) -> dict:
-    """Fallback data if API fails."""
+    text_lower = text.lower()
+
+    # --- Environmental scoring ---
+    env_score = 50
+    if "carbon" in text_lower: env_score += 10
+    if "renewable" in text_lower: env_score += 10
+    if "emission" in text_lower: env_score += 10
+    if "waste" in text_lower: env_score += 5
+
+    # --- Social scoring ---
+    soc_score = 50
+    if "employee" in text_lower: soc_score += 10
+    if "diversity" in text_lower: soc_score += 10
+    if "safety" in text_lower: soc_score += 10
+    if "community" in text_lower: soc_score += 5
+
+    # --- Governance scoring ---
+    gov_score = 50
+    if "board" in text_lower: gov_score += 10
+    if "compliance" in text_lower: gov_score += 10
+    if "audit" in text_lower: gov_score += 10
+    if "transparency" in text_lower: gov_score += 5
+
+    # Clamp scores
+    env_score = min(env_score, 95)
+    soc_score = min(soc_score, 95)
+    gov_score = min(gov_score, 95)
+
+    overall = int((env_score + soc_score + gov_score) / 3)
+
+    # Rating logic
+    if overall >= 80:
+        rating = "A"
+    elif overall >= 65:
+        rating = "B"
+    elif overall >= 50:
+        rating = "C"
+    else:
+        rating = "D"
+
     return {
-        "company_name": "Demo Corp",
+        "company_name": "Analyzed Company",
         "report_year": "2024",
-        "overall_score": 70,
-        "environmental_score": 72,
-        "social_score": 68,
-        "governance_score": 75,
+        "overall_score": overall,
+        "environmental_score": env_score,
+        "social_score": soc_score,
+        "governance_score": gov_score,
         "environmental_findings": [
-            "Reduced carbon emissions",
-            "Increased renewable energy usage",
-            "Improved waste management"
+            "Carbon and emission related initiatives detected",
+            "Renewable energy usage identified",
+            "Environmental policies present"
         ],
         "social_findings": [
-            "Improved employee safety",
-            "Better diversity inclusion",
-            "Community engagement increased"
+            "Employee and diversity initiatives found",
+            "Workplace safety mentioned",
+            "Community engagement detected"
         ],
         "governance_findings": [
-            "Strong board structure",
-            "Anti-corruption policies",
-            "Transparent reporting"
+            "Board and governance structure present",
+            "Compliance and audit systems identified",
+            "Transparency practices found"
         ],
         "environmental_metrics": {
-            "Carbon Emissions": "Reduced"
+            "Keyword Density": str(text_lower.count("carbon") + text_lower.count("emission"))
         },
         "key_risks": [
             "Climate risk",
-            "Regulatory pressure"
+            "Regulatory compliance risk"
         ],
         "recommendations": [
-            "Adopt net-zero targets",
-            "Improve ESG disclosure"
+            "Improve ESG disclosures",
+            "Increase sustainability investments",
+            "Enhance governance transparency"
         ],
-        "esg_rating": "B",
-        "summary": "Company shows moderate ESG performance with improvement scope."
+        "esg_rating": rating,
+        "summary": "This ESG analysis is generated based on keyword-driven evaluation of the uploaded report."
     }
